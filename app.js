@@ -19,7 +19,7 @@ db.connect(() => {
 });
 // ===================== INPUT API =========================
 //ambil all data admin
-app.get("/customer", (req, res) => {
+app.get("/", (req, res) => {
   var ambildata = `SELECT * FROM customer`;
   db.query(ambildata, (err, result) => {
     if (err) {
@@ -31,6 +31,6 @@ app.get("/customer", (req, res) => {
   });
 });
 // aktivasi server
-app.listen(3000, () => {
-  console.log("Server aktif di port 3000!");
+app.listen(8000, () => {
+  console.log("Server aktif di port 8000!");
 });
