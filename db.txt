@@ -1,0 +1,9 @@
+DB new_account
+
+table :
+    - customer : {id, nama, id_kawin, id_penghasilan, id_rumah, id_anak, tempat_lahir, tanggal_lahir, alamat, status_member}
+    - penghasilan : {id, status, point}
+    - status_anak : {id, status, point}
+    - status_nikah : {id, status, point}
+    - status_rumah : {id, status, point}
+    - admin_user: {id, username, password}
