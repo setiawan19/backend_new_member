@@ -88,6 +88,62 @@ app.get("/member", (req, res) => {
   });
 });
 
+//ambil data penghasilan
+app.get("/penghasilan", (req, res) => {
+  var sql = "SELECT * FROM penghasilan";
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+//ambil point penghasil
+app.get("/point_penghasilan/:id", (req, res) => {
+  var sql = `SELECT point FROM penghasilan WHERE id = ${req.params.id}`;
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+//ambil data anak
+app.get("/anak", (req, res) => {
+  var sql = "SELECT * FROM status_anak";
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+//ambil data nikah
+app.get("/nikah", (req, res) => {
+  var sql = "SELECT * FROM status_nikah";
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+//ambil data rumah
+app.get("/rumah", (req, res) => {
+  var sql = "SELECT * FROM status_rumah";
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 //add data calon member
 app.post("/add", (req, res) => {
   var data = {
