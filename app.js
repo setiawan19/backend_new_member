@@ -53,7 +53,7 @@ app.get("/non_member", (req, res) => {
                     AND customer.id_penghasilan = penghasilan.id
                     AND customer.id_anak = status_anak.id
                     AND customer.id_rumah = status_rumah.id
-                    AND customer.status_member = 0`;
+                    AND customer.status_member = "tidak"`;
   db.query(sql, (err, result) => {
     if (err) {
       throw err;
@@ -76,7 +76,7 @@ app.get("/member", (req, res) => {
                     AND customer.id_penghasilan = penghasilan.id
                     AND customer.id_anak = status_anak.id
                     AND customer.id_rumah = status_rumah.id
-                    AND customer.status_member = 1`;
+                    AND customer.status_member = "iya"`;
   // var sql = `SELECT * FROM customer`;
   db.query(sql, (err, result) => {
     if (err) {
