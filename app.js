@@ -99,17 +99,7 @@ app.get("/penghasilan", (req, res) => {
     }
   });
 });
-//ambil point penghasil
-app.get("/point_penghasilan/:id", (req, res) => {
-  var sql = `SELECT point FROM penghasilan WHERE id = ${req.params.id}`;
-  db.query(sql, (err, result) => {
-    if (err) {
-      throw err;
-    } else {
-      res.send(result);
-    }
-  });
-});
+
 //ambil data anak
 app.get("/anak", (req, res) => {
   var sql = "SELECT * FROM status_anak";
