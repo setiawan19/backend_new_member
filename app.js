@@ -83,7 +83,7 @@ app.post("/add", (req, res) => {
     } else {
       res.send({
         status: "Data Member Baru Berhasil di Tambahkan",
-        id: req.body.id,
+        // id: req.body.id,
         nama: req.body.nama,
         id_kawin: req.body.id_kawin,
         id_penghasilan: req.body.id_penghasilan,
@@ -209,7 +209,7 @@ app.get("/point_penghasilan/:id", (req, res) => {
 app.post("/penghasilan", (req, res) => {
   console.log(req.body);
   var data = {
-    id: req.body.id,
+    id: null,
     nama: req.body.nama,
     point: req.body.point
   };
@@ -220,7 +220,7 @@ app.post("/penghasilan", (req, res) => {
     } else {
       res.send({
         status: "Data Penghasilan Sukses di tambahkan",
-        id: id.req.body.id,
+        // id: id.req.body.id,
         nama: req.body.nama,
         point: req.body.point
       });
@@ -308,7 +308,7 @@ app.get("/point_anak/:id", (req, res) => {
 app.post("/anak", (req, res) => {
   console.log(req.body);
   var data = {
-    id: req.body.id,
+    id: null,
     nama: req.body.nama,
     point: req.body.point
   };
@@ -319,7 +319,7 @@ app.post("/anak", (req, res) => {
     } else {
       res.send({
         status: "Data Anak Sukses di tambahkan",
-        id: id.req.body.id,
+        // id: id.req.body.id,
         nama: req.body.nama,
         point: req.body.point
       });
@@ -407,7 +407,7 @@ app.get("/nikah/:id", (req, res) => {
 app.post("/nikah", (req, res) => {
   console.log(req.body);
   var data = {
-    id: req.body.id,
+    id: null,
     nama: req.body.nama,
     point: req.body.point
   };
@@ -418,7 +418,7 @@ app.post("/nikah", (req, res) => {
     } else {
       res.send({
         status: "Data Nikah Sukses di tambahkan",
-        id: id.req.body.id,
+        // id: id.req.body.id,
         nama: req.body.nama,
         point: req.body.point
       });
@@ -507,7 +507,7 @@ app.get("/point_rumah/:id", (req, res) => {
 app.post("/rumah", (req, res) => {
   console.log(req.body);
   var data = {
-    id: req.body.id,
+    id: null,
     nama: req.body.nama,
     point: req.body.point
   };
@@ -518,7 +518,7 @@ app.post("/rumah", (req, res) => {
     } else {
       res.send({
         status: "Data Rumah Sukses di tambahkan",
-        id: id.req.body.id,
+        // id: id.req.body.id,
         nama: req.body.nama,
         point: req.body.point
       });
