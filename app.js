@@ -66,6 +66,7 @@ app.post("/add", (req, res) => {
     nama: req.body.nama,
     id_kawin: req.body.id_kawin,
     id_penghasilan: req.body.id_penghasilan,
+    id_perpanjang: req.body.id_perpanjang,
     id_rumah: req.body.id_rumah,
     id_anak: req.body.id_anak,
     tempat_lahir: req.body.tempat_lahir,
@@ -104,10 +105,11 @@ app.get("/", (req, res) => {
                     customer.tanggal_lahir AS birth, customer.alamat AS alamat,
                     customer.status_member AS member, penghasilan.nama AS penghasilan,
                     status_rumah.nama AS rumah, status_nikah.nama AS nikah,
-                    status_anak.nama AS anak
-                    FROM customer join penghasilan, status_anak, status_nikah, status_rumah
+                    status_anak.nama AS anak, perpanjang.nama AS perpanjang
+                    FROM customer join perpanjang, penghasilan, status_anak, status_nikah, status_rumah
                     WHERE customer.id_kawin = status_nikah.id
                     AND customer.id_penghasilan = penghasilan.id
+                    AND customer.id_perpanjang = perpanjang.id
                     AND customer.id_anak = status_anak.id
                     AND customer.id_rumah = status_rumah.id`;
   db.query(sql, (err, result) => {
@@ -125,11 +127,13 @@ app.get("/non_member", (req, res) => {
   var sql = `SELECT customer.nama AS nama, customer.tempat_lahir AS lahir,
                     customer.tanggal_lahir AS birth, customer.alamat AS alamat,
                     customer.status_member AS member, penghasilan.nama AS penghasilan,
+                    perpanjang.nama AS perpanjang,
                     status_rumah.nama AS rumah, status_nikah.nama AS nikah,
                     status_anak.nama AS anak
-                    FROM customer join penghasilan, status_anak, status_nikah, status_rumah
+                    FROM customer join perpanjang, penghasilan, status_anak, status_nikah, status_rumah
                     WHERE customer.id_kawin = status_nikah.id
                     AND customer.id_penghasilan = penghasilan.id
+                    AND customer.id_perpanjang = perpanjang.id
                     AND customer.id_anak = status_anak.id
                     AND customer.id_rumah = status_rumah.id
                     AND customer.status_member = "tidak"`;
@@ -148,11 +152,13 @@ app.get("/member", (req, res) => {
   var sql = `SELECT customer.nama AS nama, customer.tempat_lahir AS lahir,
                     customer.tanggal_lahir AS birth, customer.alamat AS alamat,
                     customer.status_member AS member, penghasilan.nama AS penghasilan,
+                    perpanjang.nama AS perpanjang,
                     status_rumah.nama AS rumah, status_nikah.nama AS nikah,
                     status_anak.nama AS anak
-                    FROM customer join penghasilan, status_anak, status_nikah, status_rumah
+                    FROM customer join perpanjang, penghasilan, status_anak, status_nikah, status_rumah
                     WHERE customer.id_kawin = status_nikah.id
                     AND customer.id_penghasilan = penghasilan.id
+                    AND customer.id_perpanjang = perpanjang.id
                     AND customer.id_anak = status_anak.id
                     AND customer.id_rumah = status_rumah.id
                     AND customer.status_member = "iya"`;
@@ -253,6 +259,106 @@ app.post("/penghasilan/edit/:id", (req, res) => {
 
 //delete penghasilan by id
 app.delete("/penghasilan/:id", (req, res) => {
+  var sql = "DELETE FROM penghasilan WHERE id = ?";
+  db.query(sql, req.params.id, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send({
+        status: `Data Penghasilan Berhasil dihapus`
+      });
+    }
+  });
+});
+//#endregion
+//============ ^^^ ======================
+
+//============ Data Perpanjang =========
+//#region DATA PERPANJANG
+//ambil data perpanjang
+app.get("/perpanjang", (req, res) => {
+  var sql = "SELECT * FROM perpanjang";
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//ambil data perpanjang by id
+app.get("/perpanjang/:id", (req, res) => {
+  var sql = `SELECT * FROM perpanjang WHERE id = ${req.params.id}`;
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//ambil point perpanjang by id
+app.get("/point_perpanjang/:id", (req, res) => {
+  var sql = `SELECT point FROM perpanjang WHERE id = ${req.params.id}`;
+  db.query(sql, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+// add perpanjang & point
+app.post("/perpanjang", (req, res) => {
+  console.log(req.body);
+  var data = {
+    id: null,
+    nama: req.body.nama,
+    point: req.body.point
+  };
+  var sql = `INSERT INTO perpanjang SET ?`;
+  db.query(sql, data, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send({
+        status: "Data perpanjang Sukses di tambahkan",
+        // id: id.req.body.id,
+        nama: req.body.nama,
+        point: req.body.point
+      });
+    }
+  });
+});
+
+//edit perpanjang by id
+app.post("/perpanjang/edit/:id", (req, res) => {
+  console.log(req.body);
+  var data = {
+    id: req.body.id,
+    nama: req.body.nama,
+    point: req.body.point
+  };
+  var sql = `UPDATE penghasilan set ? WHERE id = ${req.params.id}`;
+  db.query(sql, data, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send({
+        status: `Data Berhasil di Update`,
+        id: req.body.id,
+        nama: req.body.nama,
+        point: req.body.point
+      });
+    }
+  });
+});
+
+//delete perpanjang by id
+app.delete("/perpanjang/:id", (req, res) => {
   var sql = "DELETE FROM penghasilan WHERE id = ?";
   db.query(sql, req.params.id, (err, result) => {
     if (err) {
