@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2019 at 08:15 PM
+-- Generation Time: Jul 18, 2019 at 10:41 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -57,6 +57,7 @@ CREATE TABLE `customer` (
   `id_penghasilan` int(4) NOT NULL,
   `id_rumah` int(4) NOT NULL,
   `id_anak` int(4) NOT NULL,
+  `id_perpanjang` int(4) NOT NULL,
   `tempat_lahir` varchar(20) NOT NULL,
   `tanggal_lahir` date NOT NULL,
   `alamat` varchar(20) NOT NULL,
@@ -67,9 +68,11 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `nama`, `id_kawin`, `id_penghasilan`, `id_rumah`, `id_anak`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `status_member`) VALUES
-(0, 'putri handayani', 2, 1, 1, 4, 'bandung', '2000-06-12', 'Jl.Kayumanis Timur N', 'iya'),
-(1, 'Hidayat Kusuma', 2, 2, 3, 2, 'Jakarta', '1990-07-28', 'Jakarta Timur', 'tidak');
+INSERT INTO `customer` (`id`, `nama`, `id_kawin`, `id_penghasilan`, `id_rumah`, `id_anak`, `id_perpanjang`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `status_member`) VALUES
+(1, 'Hidayat Kusuma', 2, 2, 3, 2, 2, 'Jakarta', '1990-07-28', 'Jakarta Timur', 'tidak'),
+(2, 'putri handayani', 2, 1, 1, 4, 2, 'bandung', '2000-06-12', 'Jl.Kayumanis Timur N', 'iya'),
+(554, 'asd', 2, 4, 2, 2, 0, 'asd', '2019-07-07', 'sad', 'iya'),
+(555, '', 0, 0, 0, 0, 0, '', '0000-00-00', '', 'tidak');
 
 -- --------------------------------------------------------
 
@@ -91,9 +94,27 @@ INSERT INTO `penghasilan` (`id`, `nama`, `point`) VALUES
 (1, '1 - 5 Juta', 1),
 (2, '5 - 10 Juta', 2),
 (3, '10 - 15 Juta', 3),
-(4, '> 20 Juta', 4),
-(14, '', 0),
-(15, 'oi', 43);
+(4, '> 20 Juta', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `perpanjang`
+--
+
+CREATE TABLE `perpanjang` (
+  `id` int(4) NOT NULL,
+  `nama` varchar(30) NOT NULL,
+  `point` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `perpanjang`
+--
+
+INSERT INTO `perpanjang` (`id`, `nama`, `point`) VALUES
+(1, 'tidak', 1),
+(2, 'perpanjang', 2);
 
 -- --------------------------------------------------------
 
@@ -182,6 +203,12 @@ ALTER TABLE `penghasilan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `perpanjang`
+--
+ALTER TABLE `perpanjang`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `status_anak`
 --
 ALTER TABLE `status_anak`
@@ -204,10 +231,22 @@ ALTER TABLE `status_rumah`
 --
 
 --
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=556;
+
+--
 -- AUTO_INCREMENT for table `penghasilan`
 --
 ALTER TABLE `penghasilan`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `perpanjang`
+--
+ALTER TABLE `perpanjang`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `status_anak`
